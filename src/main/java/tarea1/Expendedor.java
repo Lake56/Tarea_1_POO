@@ -1,5 +1,7 @@
 package tarea1;
 
+import java.util.ArrayList;
+
 public class Expendedor {
     //dep para productos
     private Deposito<Producto> depositoCoca;
@@ -60,5 +62,28 @@ public class Expendedor {
         if (tipo != null) {
             dep = getDeposito(tipo);
         }
+        //excepciones en el expendedor
+        //es el get q se ocupo para pa3p de deposito
+        Producto p = dep.get();
+        if (p == null){
+            depositoVuelto.add(m.getSerie());
+            throw new NoHayProductoException("No hay producto en el deposito " + cualProducto + ".");
+        }
+
+        if (m.getValor() < tipo.getPrecio()) {
+            depositoVuelto.add(m.getSerie());
+            dep.add(p);
+            throw new PagoInsuficienteException("Pago insuficiente");
+        }
+
+        int diferencia = m.getValor()-tipo.getPrecio();
+        //bucle para agregar las monedas del vuelto
+        while (diferencia>= 100) {
+            depositoVuelto.add(new Moneda100());
+            diferencia -=100;
+        }
+
+        return p;
     }
+
 }
