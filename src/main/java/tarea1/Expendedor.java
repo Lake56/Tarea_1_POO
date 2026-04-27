@@ -86,4 +86,7 @@ public class Expendedor {
         return p;
     }
 
+    public Moneda getVuelto() {
+        return depositoVuelto.get();
+    }
 }
