@@ -27,3 +27,38 @@ public class Expendedor {
             depositoSuper8.add(new Super8(i));
         }
     }
+
+    //"tipoProduct" cambiara dependiendo el nombre del enum
+    private Deposito<Producto> getDeposito(tipoProduct tipo) {
+        if (tipo == tipoProduct.COCA) {
+            return depositoCoca;
+        }
+        if (tipo == tipoProduct.SPRITE) {
+            return depositoSprite;
+        }
+        if (tipo == tipoProduct.FANTA) {
+            return depositoFanta;
+        }
+        if (tipo == tipoProduct.SNICKERS) {
+            return depositoSnickers;
+        }
+        if (tipo == tipoProduct.SUPER8) {
+            return depositoSuper8;
+        }
+        return null;
+    }
+
+    public Producto comprarProducto(Moneda m, int cualProducto)
+            throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException {
+        if (m == null) {
+            throw new PagoIncorrectoException("Sin moneda para comprar.");
+        }
+
+        //getProducto ocupa la "id"
+        tipoProduct tipo = tipoProduct.getProducto(cualProducto);
+        Deposito<Producto> dep = null;
+        if (tipo != null) {
+            dep = getDeposito(tipo);
+        }
+    }
+}

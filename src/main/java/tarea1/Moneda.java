@@ -1,7 +1,7 @@
 package tarea1;
 
 //interfaz del comparable
-public abstract class Moneda implements Comparable{
+public abstract class Moneda implements Comparable<Moneda>{
     //constructor
     public Moneda() {}
     //getters
